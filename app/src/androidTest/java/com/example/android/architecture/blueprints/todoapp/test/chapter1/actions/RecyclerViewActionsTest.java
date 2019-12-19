@@ -33,15 +33,15 @@ public class RecyclerViewActionsTest extends BaseTest {
 
     @Test
     public void addNewToDos() throws Exception {
-        generateToDos(12);
+        generateToDos(22);
         onView(withId(R.id.tasks_list))
-                .perform(actionOnItemAtPosition(10, scrollTo()));
+                .perform(actionOnItemAtPosition(9, scrollTo()));
         onView(withId(R.id.tasks_list))
                 .perform(scrollToPosition(1));
         onView(withId(R.id.tasks_list))
                 .perform(scrollToPosition(11));
         onView(withId(R.id.tasks_list))
-                .perform(actionOnItemAtPosition(11, click()));
+                .perform(actionOnItemAtPosition(20, click()));
         Espresso.pressBack();
         onView(withId(R.id.tasks_list))
                 .perform(scrollToPosition(2));
@@ -74,14 +74,14 @@ public class RecyclerViewActionsTest extends BaseTest {
      */
     private void generateToDos(int count) throws Exception {
         for (int i = 1; i <= count; i++) {
-            waitForElementIsGone(todoSavedSnackbar, 3000);
+            waitForElementIsGone(todoSavedSnackbar, 5000);
             // Adding new TO-DO.
             onView(withId(R.id.fab_add_task)).perform(clickElementWithVisibility(20));
             onView(withId(R.id.add_task_title))
                     .perform(typeText("item " + i), closeSoftKeyboard());
             onView(withId(R.id.fab_edit_task_done)).perform(click());
-            waitForElement(todoSavedSnackbar, 3000);
+            waitForElement(todoSavedSnackbar, 5000);
         }
-        waitForElementIsGone(todoSavedSnackbar, 3000);
+        waitForElementIsGone(todoSavedSnackbar, 5000);
     }
 }
